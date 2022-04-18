@@ -24,13 +24,13 @@ handlers:
     class: logging.FileHandler
     level: DEBUG
     formatter: file
-    filename: 'FILENAME.log'
+    filename: 'sample.log'
     mode: 'w'
   err:
     class: logging.FileHandler
     level: WARN
     formatter: err
-    filename: 'err.log'
+    filename: 'errors.log'
     mode: 'w'
 loggers:
   '|':
