@@ -37,10 +37,7 @@ def init_config(config_file = 'email.ini'):
     config.read(config_file)
     if 'port' in config['email']:
         smtp_port = config['email']['port']
-    #print('host: {}'.format( config['email']['smtp_host'] ))
-    # TODO
-    #  verify host
-    #  config['email']['smtp_host'],
+
 
 
 def send_simple(text, subject="Testing", address=None, cc=None):
@@ -48,9 +45,7 @@ def send_simple(text, subject="Testing", address=None, cc=None):
 
     with smtplib.SMTP(  config['email']['smtp_host'], smtp_port ) as s:
         try:
-#            s.set_debuglevel(2)
-#            s.set_debuglevel(1)
-#            s.set_debuglevel(0)
+            s.set_debuglevel(0)
 
             if 'username' in config['email']:
                 # probably won't work, requires TLS?
@@ -67,12 +62,6 @@ def send_simple(text, subject="Testing", address=None, cc=None):
 
 def send_multi(text, subject="Testing", address=[], cc=None):
 
-    if False: 
-        if not cc: 
-            if len(address) > 1:
-                cc = address[1:]
-                log.debug(f"add cc={cc} ")
-#    msg = get_message( text, subject=subject, address=elist, cc_list=cc)
     elist = ",".join(address)
     msg = get_message( text, subject=subject, address=elist, cc_email=cc)
 
@@ -134,9 +123,6 @@ def get_message(text, subject="Testing", address=None, cc_email=None, cc_list=[]
 
     if 'reply-to' in config['email']:
         msg['reply-to'] = config['email']['reply-to']
-    else:
-        #msg['reply-to'] = config['email']['return_email']
-        pass
 
     if 'signature' in config['email']:
         text += "\n" + config['email']['signature']
