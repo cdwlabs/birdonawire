@@ -1,0 +1,8 @@
+[client]
+# the container's port (3306) is mapped here
+port=3308
+database=deldev
+# host has to be given as IP, not hostname
+host=127.0.0.1
+user=root
+password=s3Krit

@@ -1,0 +1,39 @@
+# console, file, error
+version: 1
+log_root: '|'
+log_dir: 'logs'
+#timestamped: 1
+#timestamp_format: '-%Y%M' 
+formatters:
+  cons:
+    format: '%(name)s,  %(levelname)s - %(message)s'
+  file:
+    format: '%(asctime)s :  %(name)s - %(levelname)s - %(message)s'
+  err:
+    # fails: TypeError: not enough arguments for format string
+    #format: '%(asctime)s : %(message)s IN %(module)s'
+    format: '%(asctime)s - %(levelname)s - %(message)s - IN %(module)s: %(filename)s #%(lineno)s '
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: cons
+    stream: ext://sys.stdout
+  file:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: file
+    filename: 'FILENAME.log'
+    mode: 'w'
+  err:
+    class: logging.FileHandler
+    level: WARN
+    formatter: err
+    filename: 'err.log'
+    mode: 'w'
+loggers:
+  '|':
+    level: DEBUG
+    handlers: [console,file, err]
+    propagate: no
