@@ -1,0 +1,7 @@
+DirectoryIndex summary.php index.html index.php 
+
+# restrict
+AuthType Basic
+AuthName "Restricted Files"
+AuthUserFile  /etc/apache2/data/passwords
+Require valid-user 
